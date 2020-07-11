@@ -5,8 +5,6 @@ if [[ -z $* ]] ; then
     exit 1
 fi
 export CLASSPATH=target/AWSSDKS3-1.0-SNAPSHOT.jar
-export className=$1
-echo "## Running $className..."
-shift
+
 echo "## arguments $@..."
-mvn exec:java -Dexec.mainClass="creates3.$className" -Dexec.args="$@" -Dexec.cleanupDaemonThreads=false
+mvn exec:java -Dexec.mainClass="putobject.PutObject" -Dexec.args="$@" -Dexec.cleanupDaemonThreads=false

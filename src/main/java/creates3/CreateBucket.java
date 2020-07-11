@@ -1,4 +1,4 @@
-package createS3;
+package creates3;
 
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
