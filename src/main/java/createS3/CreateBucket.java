@@ -12,12 +12,16 @@ import java.util.List;
  * Create an Amazon S3 bucket.
  *
  * This code expects that you have AWS credentials set up per:
+ * 其实也就是设置一下 aws configure
  * http://docs.aws.amazon.com/java-sdk/latest/developer-guide/setup-credentials.html
+ *
  */
 public class CreateBucket {
     public static Bucket getBucket(String bucket_name) {
+        // 创建 s3 client
         final AmazonS3 s3 = AmazonS3ClientBuilder.standard().withRegion(Regions.DEFAULT_REGION).build();
         Bucket named_bucket = null;
+        // s3 client 可以列出 buckets
         List<Bucket> buckets = s3.listBuckets();
         for (Bucket b : buckets) {
             if (b.getName().equals(bucket_name)) {
@@ -28,6 +32,7 @@ public class CreateBucket {
     }
 
     public static Bucket createBucket(String bucket_name) {
+        // 创建 s3 client
         final AmazonS3 s3 = AmazonS3ClientBuilder.standard().withRegion(Regions.DEFAULT_REGION).build();
         Bucket b = null;
         if (s3.doesBucketExistV2(bucket_name)) {
@@ -35,6 +40,7 @@ public class CreateBucket {
             b = getBucket(bucket_name);
         } else {
             try {
+                // 创建 bucket
                 b = s3.createBucket(bucket_name);
             } catch (AmazonS3Exception e) {
                 System.err.println(e.getErrorMessage());
